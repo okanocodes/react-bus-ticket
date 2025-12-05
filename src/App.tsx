@@ -1,13 +1,12 @@
-// import reactLogo from "./assets/react.svg";
-// import viteLogo from "/vite.svg";
-import "./App.css";
+import SearchPage from "./pages/SearchPage.tsx";
+import Header from "./components/Header.tsx";
 
-function App() {
+export default function App() {
   return (
     <>
       <div>selam</div>
+      <Header />
+      Search page: <SearchPage />
     </>
   );
 }
-
-export default App;
