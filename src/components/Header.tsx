@@ -8,6 +8,8 @@ import IconButton from "@mui/material/IconButton";
 import MenuIcon from "@mui/icons-material/Menu";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
+import ThemeSwitcher from "./ThemeSwitcher";
+import { NavLink } from "react-router-dom";
 
 interface Props {
   /**
@@ -68,21 +70,24 @@ export default function DrawerAppBar(props: Props) {
           >
             <MenuIcon />
           </IconButton>
+
           <Typography
             variant="h6"
             component="div"
             sx={{ display: { xs: "none", sm: "flex" } }}
+            color="primary.contrastText"
           >
-            Bus Ticket
-          </Typography>
-          <Box sx={{ display: { xs: "none", sm: "flex" }, gap: 2 }}>
-            <Typography
-              variant="h6"
-              component="div"
-              sx={{ display: { xs: "none", sm: "flex" } }}
+            <NavLink
+              to="/"
+              style={{ textDecoration: "none", color: "inherit" }}
             >
-              Theme switcher
-            </Typography>
+              Bus Ticket
+            </NavLink>
+          </Typography>
+
+          <Box sx={{ display: { xs: "none", sm: "flex" }, gap: 2 }}>
+            <ThemeSwitcher />
+
             <Typography
               variant="h6"
               component="div"
