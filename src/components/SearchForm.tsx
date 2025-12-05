@@ -31,6 +31,10 @@ export default function SearchForm({
 
   const date = watch("date");
 
+  const destinationAgencies = agencies.filter(
+    (a: any) => a.id !== watch("from")
+  );
+
   return (
     <Box
       component="form"
@@ -52,7 +56,7 @@ export default function SearchForm({
         sx={{ flex: 1 }}
       ></Autocomplete>
       <Autocomplete
-        options={agencies}
+        options={destinationAgencies}
         getOptionLabel={(opt: any) => opt.name}
         onChange={(_, v: any) => setValue("to", v?.id || "")}
         renderInput={(params) => <TextField {...params} label="Varış" />}

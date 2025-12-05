@@ -1,7 +1,8 @@
 import SearchForm from "../components/SearchForm";
 import ScheduleList from "../components/ScheduleList";
-import { useState } from "react";
-
+import { useMemo, useState } from "react";
+import { useSchedules } from "../hooks/useSchedules";
+import { Typography } from "@mui/material";
 export default function SearchPage() {
   const [formInputs, setFormInputs] = useState<{
     from: string;
@@ -9,13 +10,53 @@ export default function SearchPage() {
     date: string;
   } | null>(null);
 
-  console.log("formInputs:", formInputs);
+  const { data: schedules = [], isLoading } = useSchedules(
+    formInputs?.from || null,
+    formInputs?.to || null,
+    formInputs?.date || null
+  );
+
+  // Add sorting state
+  const [sortBy, setSortBy] = useState<"departure" | "price" | null>(null);
+
+  // Sort schedules based on sortBy state
+  const sortedSchedules = useMemo(() => {
+    if (!sortBy || !schedules.length) return schedules;
+
+    return [...schedules].sort((a, b) => {
+      if (sortBy === "departure") {
+        return (
+          new Date(a.departure).getTime() - new Date(b.departure).getTime()
+        );
+      }
+      if (sortBy === "price") {
+        return a.price - b.price;
+      }
+      return 0;
+    });
+  }, [schedules, sortBy]);
+
+  const handleSortByDeparture = () => {
+    setSortBy("departure");
+  };
+
+  const handleSortByPrice = () => {
+    setSortBy("price");
+  };
 
   return (
     <>
       <div>Sefer Ara:</div>
       <SearchForm onSearch={setFormInputs} />
-      {formInputs && <ScheduleList />}
+      {isLoading && <Typography mt={2}>Yükleniyor...</Typography>}
+      {!isLoading && formInputs && (
+        <ScheduleList
+          list={sortedSchedules}
+          onSortByDeparture={handleSortByDeparture}
+          onSortByPrice={handleSortByPrice}
+          scheduleDate={formInputs.date}
+        />
+      )}
     </>
   );
 }
