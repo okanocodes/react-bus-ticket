@@ -97,7 +97,7 @@ Gerekli paketleri yükleyin
 Sunucuyu çalıştırın
 
 ```bash
-  npm run start
+  npm run dev
 ```
 
 Test edin
