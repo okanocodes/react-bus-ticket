@@ -29,8 +29,6 @@ export default function SearchForm({
     resolver: zodResolver(schema),
   });
 
-  const date = watch("date");
-
   const destinationAgencies = agencies.filter(
     (a: any) => a.id !== watch("from")
   );

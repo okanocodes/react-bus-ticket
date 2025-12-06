@@ -20,13 +20,11 @@ import dayjsPluginUTC from "dayjs/plugin/utc.js";
 import SwapVertIcon from "@mui/icons-material/SwapVert";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
-import i18n from "../app/i18n";
 
 dayjs.extend(dayjsPluginUTC);
 
 export default function ScheduleList({
   list,
-  scheduleDate,
   companies,
   selectedCompany,
   onSelectCompany,
@@ -34,7 +32,6 @@ export default function ScheduleList({
   onSortByPrice,
 }: {
   list: ScheduleItem[];
-  scheduleDate: string;
   companies: string[];
   selectedCompany: string | null;
   onSelectCompany: (val: string | null) => void;
@@ -47,17 +44,6 @@ export default function ScheduleList({
   const { t } = useTranslation();
 
   if (!list.length) return <Typography>{t("scheduleNotFound")}</Typography>;
-
-  const parsedDate = new Date(Date.parse(scheduleDate));
-  const dateOptions: Intl.DateTimeFormatOptions = {
-    weekday: "long",
-    month: "long",
-    day: "numeric",
-  };
-
-  const formattedScheduleDate = scheduleDate
-    ? parsedDate.toLocaleDateString(i18n.language, dateOptions)
-    : "";
 
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
@@ -174,13 +160,9 @@ export default function ScheduleList({
               }}
             >
               <Box sx={{ display: "flex", gap: 1, marginBottom: { xs: 2 } }}>
-                {/* <Typography variant="h6" component="div">
-                  {dayjs(item.departure).format("DD/MM/YYYY")}
-                </Typography> */}
                 <Typography variant="h6" component="div">
                   {dayjs(item.departure).format("HH:mm")} →
                   {dayjs(item.arrival).format("HH:mm")}
-                  {/* {item.departure} → {item.arrival} */}
                 </Typography>
               </Box>
               <Box

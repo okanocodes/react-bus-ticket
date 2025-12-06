@@ -64,7 +64,6 @@ export default function SearchPage() {
       {!isLoading && formInputs && (
         <ScheduleList
           list={filteredSchedules}
-          scheduleDate={formInputs.date}
           companies={companies} // NEW
           selectedCompany={selectedCompany} // NEW
           onSelectCompany={setSelectedCompany} // NEW

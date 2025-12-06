@@ -1,5 +1,5 @@
 import React from "react";
-import { Box, Typography } from "@mui/material";
+import { Box } from "@mui/material";
 import type { SeatSchema } from "../types/seats";
 import { useTripStore } from "../store/useTripStore";
 import DoorBackOutlinedIcon from "@mui/icons-material/DoorBackOutlined";
@@ -37,6 +37,7 @@ export default React.memo(function SeatMap({ schema }: { schema: SeatSchema }) {
         cellsUI.push(
           <Box
             key={key}
+            data-testid="seat-door"
             sx={{
               width: CELL.w,
               height: CELL.h,
@@ -77,7 +78,17 @@ export default React.memo(function SeatMap({ schema }: { schema: SeatSchema }) {
 
       cellsUI.push(
         <Box
+          className={
+            isTaken
+              ? "seat taken"
+              : isSelected
+              ? "seat selected"
+              : maxLimitReached
+              ? "seat not-allowed"
+              : "seat"
+          }
           key={key}
+          data-testid={`seat-${seat.no}`}
           role={isTaken ? "img" : "button"}
           onClick={() => !isTaken && toggleSeat(seat.no)}
           sx={{
@@ -130,6 +141,7 @@ export default React.memo(function SeatMap({ schema }: { schema: SeatSchema }) {
             return (
               <Box
                 key={`top-${col}`}
+                data-testid={isDoor ? "seat-door" : ""}
                 sx={{
                   width: CELL.w,
                   height: CELL.h,
