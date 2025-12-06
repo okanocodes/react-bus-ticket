@@ -4,6 +4,38 @@ Kullanıcıların kalkış, varış noktası ve tarih seçerek otobüs seferi ar
 
 Uygulama React, Material UI, React Query, React Hook Form, Zod, i18next gibi kütüphaneler ile geliştirilmiştir.
 
+## Lokalde Çalıştırın
+
+Projeyi klonlayın
+
+```bash
+  git clone https://github.com/okanocodes/react-bus-ticket.git
+```
+
+Proje dizinine gidin
+
+```bash
+  cd react-bus-ticket
+```
+
+Gerekli paketleri yükleyin
+
+```bash
+  npm install
+```
+
+Sunucuyu çalıştırın
+
+```bash
+  npm run dev
+```
+
+Test edin
+
+```bash
+  npm run test
+```
+
 ## Proje Yapısı
 
     react-bus-ticket/
@@ -73,35 +105,3 @@ Uygulama React, Material UI, React Query, React Hook Form, Zod, i18next gibi kü
 ## Ekran Görüntüleri
 
 ![Uygulama Ekran Görüntüsü](https://i.ibb.co/XZz1C7Z4/localhost-5173-summary-Samsung-Galaxy-S20-Ultra-1.png)
-
-## Lokalde Çalıştırın
-
-Projeyi klonlayın
-
-```bash
-  git clone https://github.com/okanocodes/react-bus-ticket.git
-```
-
-Proje dizinine gidin
-
-```bash
-  cd react-bus-ticket
-```
-
-Gerekli paketleri yükleyin
-
-```bash
-  npm install
-```
-
-Sunucuyu çalıştırın
-
-```bash
-  npm run dev
-```
-
-Test edin
-
-```bash
-  npm run test
-```
