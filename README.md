@@ -1,6 +1,6 @@
 # Otobüs bileti satış uygulaması
 
-Kullanıcıların kalkış, varış noktası ve tarih seçerek otobüs seferi arayabildiği, ardından araç içi koltuk planı üzerinden koltuk seçimi yapabildiği modern bir React uygulamasıdır.
+Kullanıcıların kalkış, varış noktası ve tarih seçerek otobüs seferi arayabildiği, ardından araç içi koltuk planı üzerinden koltuk seçimi yapabildiği modern bir prototip.
 
 Uygulama React, Material UI, React Query, React Hook Form, Zod, i18next gibi kütüphaneler ile geliştirilmiştir.
 
