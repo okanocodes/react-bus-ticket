@@ -1,73 +1,107 @@
-# React + TypeScript + Vite
+# Otobüs bileti satış uygulaması
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Kullanıcıların kalkış, varış noktası ve tarih seçerek otobüs seferi arayabildiği, ardından araç içi koltuk planı üzerinden koltuk seçimi yapabildiği modern bir React uygulamasıdır.
 
-Currently, two official plugins are available:
+Uygulama React, Material UI, React Query, React Hook Form, Zod, i18next gibi kütüphaneler ile geliştirilmiştir.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Proje Yapısı
 
-## React Compiler
+    react-bus-ticket/
+    ├── .gitignore
+    ├── eslint.config.js
+    ├── index.html
+    ├── package-lock.json
+    ├── package.json
+    ├── public/
+    │   └── mockServiceWorker.js
+    ├── README.md
+    ├── src/
+    │   ├── app/
+    │   │   ├── dayjs-i18n.ts
+    │   │   ├── i18n.ts
+    │   │   └── routes.ts
+    │   ├── assets/
+    │   │   └── react.svg
+    │   ├── components/
+    │   │   ├── Header.tsx
+    │   │   ├── LanguageSwitcher.tsx
+    │   │   ├── PassengerForm.tsx
+    │   │   ├── PriceSummary.tsx
+    │   │   ├── ScheduleList.tsx
+    │   │   ├── SearchForm.tsx
+    │   │   ├── SeatMap.tsx
+    │   │   └── ThemeSwitcher.tsx
+    │   ├── hooks/
+    │   │   ├── useDayjsTranslation.ts
+    │   │   ├── usePassengerSchema.ts
+    │   │   ├── useSchedules.ts
+    │   │   └── useSeatSchema.ts
+    │   ├── index.css
+    │   ├── layouts/
+    │   │   └── RootLayout.tsx
+    │   ├── main.tsx
+    │   ├── mocks/
+    │   │   ├── browser.ts
+    │   │   ├── generateSchedules.ts
+    │   │   ├── handlers.ts
+    │   │   └── node.ts
+    │   ├── pages/
+    │   │   ├── SearchPage.tsx
+    │   │   ├── SeatSelectionPage.tsx
+    │   │   ├── SuccessPage.tsx
+    │   │   └── SummaryPage.tsx
+    │   ├── services/
+    │   │   └── apiClient.ts
+    │   ├── store/
+    │   │   └── useTripStore.ts
+    │   ├── test/
+    │   │   ├── PriceSummary.test.tsx
+    │   │   ├── SearchForm.test.tsx
+    │   │   └── SeatMap.test.tsx
+    │   ├── test-utils/
+    │   │   ├── mockZustand.ts
+    │   │   └── testwrapper.tsx
+    │   └── types/
+    │       ├── schedules.ts
+    │       └── seats.ts
+    ├── tsconfig.app.json
+    ├── tsconfig.json
+    ├── tsconfig.node.json
+    ├── vite.config.ts
+    └── vitest-setup.ts
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## Ekran Görüntüleri
 
-## Expanding the ESLint configuration
+![Uygulama Ekran Görüntüsü](https://i.ibb.co/XZz1C7Z4/localhost-5173-summary-Samsung-Galaxy-S20-Ultra-1.png)
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+## Lokalde Çalıştırın
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+Projeyi klonlayın
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```bash
+  git clone https://github.com/okanocodes/react-bus-ticket.git
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+Proje dizinine gidin
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+```bash
+  cd react-bus-ticket
+```
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+Gerekli paketleri yükleyin
+
+```bash
+  npm install
+```
+
+Sunucuyu çalıştırın
+
+```bash
+  npm run start
+```
+
+Test edin
+
+```bash
+  npm run test
 ```

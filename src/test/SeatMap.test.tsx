@@ -6,7 +6,7 @@ import i18n from "../app/i18n";
 import * as store from "../store/useTripStore";
 import type { SeatSchema } from "../types/seats";
 
-import { mockZustand } from "./mockZustand";
+import { mockZustand } from "../test-utils/mockZustand";
 
 mockZustand();
 
