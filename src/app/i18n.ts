@@ -79,7 +79,7 @@ const resources = {
       all: "All",
       byTime: "By Time",
       byPrice: "By Price",
-      company: "Bus Company",
+      company: "Operator",
       seatSelection: "Seat Selection",
       selectedSeats: "Selected Seats",
       noSelectedSeats: "No Seats Selected",

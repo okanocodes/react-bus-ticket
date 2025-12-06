@@ -70,7 +70,13 @@ export default function ScheduleList({
 
   return (
     <Stack spacing={2} mt={2}>
-      <Stack direction="row" justifyContent="space-between" alignItems="center">
+      <Stack
+        direction={{ xs: "row", sm: "row" }}
+        justifyContent="space-between"
+        alignItems={{ xs: "stretch", sm: "center" }}
+        spacing={{ xs: 2, sm: 0 }}
+      >
+        {" "}
         <Box>
           <FormControl size="small" sx={{ minWidth: 200 }}>
             <InputLabel>{t("company")}</InputLabel>
@@ -162,11 +168,12 @@ export default function ScheduleList({
             <Box
               sx={{
                 display: "flex",
-                alignItems: "center",
+                alignItems: { xs: "start", md: "center" },
                 justifyContent: "space-between",
+                flexDirection: { xs: "column", md: "row" },
               }}
             >
-              <Box sx={{ display: "flex", gap: 1 }}>
+              <Box sx={{ display: "flex", gap: 1, marginBottom: { xs: 2 } }}>
                 {/* <Typography variant="h6" component="div">
                   {dayjs(item.departure).format("DD/MM/YYYY")}
                 </Typography> */}
@@ -179,8 +186,9 @@ export default function ScheduleList({
               <Box
                 sx={{
                   display: "flex",
-                  alignItems: "center",
-                  gap: 2,
+                  alignItems: { xs: "start", md: "center" },
+                  flexDirection: { xs: "column", md: "row" },
+                  gap: { xs: 0, md: 2 },
                 }}
               >
                 <Typography variant="h5" component="div">

@@ -21,7 +21,10 @@ export default function RootLayout() {
           <Outlet />
         </Box>
         <Box component="footer" sx={{ p: 2, mt: "auto", textAlign: "center" }}>
-          Footer content
+          made by{" "}
+          <a href="https://github.com/okanocodes/" target="_blank">
+            okan şahin
+          </a>
         </Box>
       </Box>
     </ThemeProvider>

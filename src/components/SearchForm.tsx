@@ -47,6 +47,7 @@ export default function SearchForm({
         alignItems: "center",
         justifyContent: "space-between",
         padding: "2em 0",
+        flexDirection: { xs: "column", md: "row" },
       }}
       onSubmit={handleSubmit(onSearch)}
     >
@@ -57,14 +58,14 @@ export default function SearchForm({
         )}
         getOptionLabel={(opt: any) => opt.name}
         onChange={(_, v: any) => setValue("from", v?.id || "")}
-        sx={{ flex: 1 }}
+        sx={{ flex: 1, width: { xs: "100%" } }}
       ></Autocomplete>
       <Autocomplete
         options={destinationAgencies}
         getOptionLabel={(opt: any) => opt.name}
         onChange={(_, v: any) => setValue("to", v?.id || "")}
         renderInput={(params) => <TextField {...params} label={t("arrival")} />}
-        sx={{ flex: 1 }}
+        sx={{ flex: 1, width: { xs: "100%" } }}
       />
 
       <TextField
@@ -79,7 +80,7 @@ export default function SearchForm({
           },
           inputLabel: { shrink: true },
         }}
-        sx={{ flex: 1 }}
+        sx={{ flex: 1, width: { xs: "100%" } }}
       />
 
       <Button variant="contained" type="submit" sx={{ alignSelf: "stretch" }}>

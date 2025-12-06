@@ -31,18 +31,32 @@ export default function DrawerAppBar(props: Props) {
   };
 
   const drawer = (
-    <Box onClick={handleDrawerToggle} sx={{ textAlign: "center" }}>
-      <Typography variant="h6" sx={{ my: 2 }}>
-        MUI
+    <Box
+      onClick={handleDrawerToggle}
+      sx={{ textAlign: "center", padding: "20px" }}
+    >
+      <Typography
+        variant="h6"
+        component="div"
+        sx={{ display: "flex" }}
+        color="primary"
+      >
+        <NavLink to="/" style={{ textDecoration: "none", color: "inherit" }}>
+          Bus Ticket
+        </NavLink>
       </Typography>
       <Divider />
-      <Box sx={{ display: "flex", flexDirection: "column", gap: 2 }}>
-        <Typography variant="h6" component="div">
-          Theme switcher
-        </Typography>
-        <Typography variant="h6" component="div">
-          Lang switcher
-        </Typography>
+      <Box
+        sx={{
+          display: "flex",
+          flexDirection: "column",
+          gap: 2,
+          alignItems: "center",
+        }}
+      >
+        <ThemeSwitcher />
+
+        <LanguageSwitcher />
       </Box>
     </Box>
   );
@@ -76,7 +90,7 @@ export default function DrawerAppBar(props: Props) {
             variant="h6"
             component="div"
             sx={{ display: { xs: "none", sm: "flex" } }}
-            color="primary.contrastText"
+            color="primary.dark"
           >
             <NavLink
               to="/"
