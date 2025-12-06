@@ -5,12 +5,14 @@ import Grid from "@mui/material/Grid";
 import DoorBackOutlinedIcon from "@mui/icons-material/DoorBackOutlined";
 import SeatMap from "../components/SeatMap";
 import { useTripStore } from "../store/useTripStore";
+import { useTranslation } from "react-i18next";
 
 export default function SeatSelectionPage() {
   const { tripId } = useParams();
   const navigate = useNavigate();
   const selectedSeats = useTripStore((s) => s.selectedSeats);
   const trip = useTripStore((s) => s.selectedTrip);
+  const { t } = useTranslation();
 
   const { data: schema, isLoading } = useSeatSchema(tripId!);
 
@@ -19,10 +21,10 @@ export default function SeatSelectionPage() {
   return (
     <Box p={3}>
       <Typography variant="h5" mb={2}>
-        Koltuk Seçimi
+        {t("seatSelection")}
       </Typography>
 
-      {isLoading && <Typography>Yükleniyor...</Typography>}
+      {isLoading && <Typography>{t("loading")}</Typography>}
 
       {schema && (
         <Grid container spacing={4}>
@@ -34,6 +36,7 @@ export default function SeatSelectionPage() {
           {/* Legend */}
           <Grid
             size={{ xs: 12, md: 4 }}
+            marginTop={{ xs: 15, md: 10 }}
             sx={{
               position: "sticky",
               top: 90,
@@ -44,59 +47,72 @@ export default function SeatSelectionPage() {
             <Box mb={3}>
               <Box
                 mt={2}
-                sx={{ display: "flex", gap: 3, alignItems: "center" }}
+                sx={{
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "space-between",
+                  flexWrap: "wrap",
+                }}
               >
-                <Box
-                  sx={{
-                    width: 32,
-                    height: 32,
-                    bgcolor: "grey.200",
-                    borderRadius: 0.5,
-                  }}
-                />
-                <Typography variant="caption">Boş</Typography>
-
-                <Box
-                  sx={{
-                    width: 32,
-                    height: 32,
-                    bgcolor: "success.main",
-                    borderRadius: 0.5,
-                  }}
-                />
-                <Typography variant="caption">Seçili</Typography>
-
-                <Box
-                  sx={{
-                    width: 32,
-                    height: 32,
-                    bgcolor: "error.main",
-                    borderRadius: 0.5,
-                  }}
-                />
-                <Typography variant="caption">Dolu</Typography>
-
-                <Box
-                  sx={{
-                    width: 32,
-                    height: 32,
-                    bgcolor: "#424242",
-                    borderRadius: 0.5,
-                    color: "white",
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                    fontSize: "0.8rem",
-                  }}
-                >
-                  <DoorBackOutlinedIcon fontSize="inherit" />
+                <Box>
+                  <Box
+                    sx={{
+                      width: 32,
+                      height: 32,
+                      bgcolor: "grey.200",
+                      borderRadius: 0.5,
+                    }}
+                  />
+                  <Typography variant="caption">{t("empty")}</Typography>
                 </Box>
-                <Typography variant="caption">Kapı</Typography>
+
+                <Box>
+                  <Box
+                    sx={{
+                      width: 32,
+                      height: 32,
+                      bgcolor: "success.main",
+                      borderRadius: 0.5,
+                    }}
+                  />
+                  <Typography variant="caption">{t("selected")}</Typography>
+                </Box>
+
+                <Box>
+                  <Box
+                    sx={{
+                      width: 32,
+                      height: 32,
+                      bgcolor: "error.main",
+                      borderRadius: 0.5,
+                    }}
+                  />
+                  <Typography variant="caption">{t("occupied")}</Typography>
+                </Box>
+
+                <Box>
+                  <Box
+                    sx={{
+                      width: 32,
+                      height: 32,
+                      bgcolor: "#424242",
+                      borderRadius: 0.5,
+                      color: "white",
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                      fontSize: "0.8rem",
+                    }}
+                  >
+                    <DoorBackOutlinedIcon />
+                  </Box>
+                  <Typography variant="caption">{t("door")}</Typography>
+                </Box>
               </Box>
             </Box>
 
             {/* Selected Seats */}
-            <Typography variant="h6">Seçilen Koltuklar</Typography>
+            <Typography variant="h6">{t("selectedSeats")}:</Typography>
             <Stack direction="row" spacing={1} mb={3} flexWrap="wrap">
               {selectedSeats.length
                 ? selectedSeats.map((s) => (
@@ -123,7 +139,7 @@ export default function SeatSelectionPage() {
                       </Typography>
                     </Box>
                   ))
-                : "Henüz koltuk seçilmedi."}
+                : t("noSelectedSeats")}
             </Stack>
 
             {/* Button */}
@@ -133,7 +149,7 @@ export default function SeatSelectionPage() {
               disabled={selectedSeats.length === 0}
               onClick={() => navigate("/summary")}
             >
-              Devam Et
+              {t("continue")}
             </Button>
           </Grid>
         </Grid>

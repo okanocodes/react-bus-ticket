@@ -1,4 +1,5 @@
 import { Box, Typography } from "@mui/material";
+import { useTranslation } from "react-i18next";
 
 export default function PriceSummary({
   seatCount,
@@ -7,13 +8,19 @@ export default function PriceSummary({
   seatCount: number;
   unitPrice: number;
 }) {
+  const { t } = useTranslation();
+
   const total = seatCount * unitPrice;
   return (
     <Box mt={2}>
-      <Typography>Birim Fiyat: {unitPrice} TL</Typography>
-      <Typography>Koltuk Sayısı: {seatCount}</Typography>
+      <Typography>
+        {t("unitPrice")}: {unitPrice} TL
+      </Typography>
+      <Typography>
+        {t("seatCount")}: {seatCount}
+      </Typography>
       <Typography variant="h6" mt={1}>
-        Toplam: {total} TL
+        {t("total")}: {total} TL
       </Typography>
     </Box>
   );

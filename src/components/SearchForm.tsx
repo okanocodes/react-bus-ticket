@@ -5,6 +5,7 @@ import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import dayjs from "dayjs";
+import { useTranslation } from "react-i18next";
 
 const schema = z.object({
   from: z.string().min(1),
@@ -35,6 +36,8 @@ export default function SearchForm({
     (a: any) => a.id !== watch("from")
   );
 
+  const { t } = useTranslation();
+
   return (
     <Box
       component="form"
@@ -50,7 +53,9 @@ export default function SearchForm({
     >
       <Autocomplete
         options={agencies}
-        renderInput={(params) => <TextField {...params} label="Kalkış" />}
+        renderInput={(params) => (
+          <TextField {...params} label={t("departure")} />
+        )}
         getOptionLabel={(opt: any) => opt.name}
         onChange={(_, v: any) => setValue("from", v?.id || "")}
         sx={{ flex: 1 }}
@@ -59,13 +64,13 @@ export default function SearchForm({
         options={destinationAgencies}
         getOptionLabel={(opt: any) => opt.name}
         onChange={(_, v: any) => setValue("to", v?.id || "")}
-        renderInput={(params) => <TextField {...params} label="Varış" />}
+        renderInput={(params) => <TextField {...params} label={t("arrival")} />}
         sx={{ flex: 1 }}
       />
 
       <TextField
         type="date"
-        label="Tarih"
+        label={t("date")}
         {...register("date")}
         slotProps={{
           input: {
@@ -79,7 +84,7 @@ export default function SearchForm({
       />
 
       <Button variant="contained" type="submit" sx={{ alignSelf: "stretch" }}>
-        Ara
+        {t("search")}
       </Button>
     </Box>
   );

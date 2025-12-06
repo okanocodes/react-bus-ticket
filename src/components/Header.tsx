@@ -10,6 +10,7 @@ import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import ThemeSwitcher from "./ThemeSwitcher";
 import { NavLink } from "react-router-dom";
+import LanguageSwitcher from "./LanguageSwitcher";
 
 interface Props {
   /**
@@ -88,13 +89,7 @@ export default function DrawerAppBar(props: Props) {
           <Box sx={{ display: { xs: "none", sm: "flex" }, gap: 2 }}>
             <ThemeSwitcher />
 
-            <Typography
-              variant="h6"
-              component="div"
-              sx={{ display: { xs: "none", sm: "flex" } }}
-            >
-              Lang switcher
-            </Typography>
+            <LanguageSwitcher />
           </Box>
         </Toolbar>
       </AppBar>

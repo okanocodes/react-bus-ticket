@@ -18,6 +18,8 @@ import dayjs from "dayjs";
 import dayjsPluginUTC from "dayjs/plugin/utc.js";
 import SwapVertIcon from "@mui/icons-material/SwapVert";
 import { useState } from "react";
+import { useTranslation } from "react-i18next";
+import i18n from "../app/i18n";
 
 dayjs.extend(dayjsPluginUTC);
 
@@ -35,7 +37,9 @@ export default function ScheduleList({
   const navigate = useNavigate();
   const setTrip = useTripStore((s) => s.setTrip);
 
-  if (!list.length) return <Typography>Sefer bulunamadı.</Typography>;
+  const { t } = useTranslation();
+
+  if (!list.length) return <Typography>{t("scheduleNotFound")}</Typography>;
 
   const parsedDate = new Date(Date.parse(scheduleDate));
   const dateOptions: Intl.DateTimeFormatOptions = {
@@ -45,7 +49,7 @@ export default function ScheduleList({
   };
 
   const formattedScheduleDate = scheduleDate
-    ? parsedDate.toLocaleDateString("tr-TR", dateOptions)
+    ? parsedDate.toLocaleDateString(i18n.language, dateOptions)
     : "";
 
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
@@ -68,7 +72,9 @@ export default function ScheduleList({
   return (
     <Stack spacing={2} mt={2}>
       <Stack direction="row" justifyContent="space-between" alignItems="center">
-        <Box>Yolculuk Tarihi: {formattedScheduleDate}</Box>
+        <Box>
+          {t("dateOfJourney")}: {formattedScheduleDate}
+        </Box>
         <Box display="flex" gap={2}>
           <Tooltip title="Sırala">
             <Button
@@ -80,7 +86,7 @@ export default function ScheduleList({
               color="primary"
             >
               <SwapVertIcon></SwapVertIcon>
-              <Typography>Sırala</Typography>
+              <Typography>{t("sort")}</Typography>
             </Button>
           </Tooltip>
           <Menu
@@ -135,7 +141,7 @@ export default function ScheduleList({
             <Typography variant="h5">{item.company}</Typography>
 
             <Typography variant="body1" color="textSecondary" mb={1}>
-              Boş Koltuk: {item.availableSeats}
+              {t("availableSeats")}: {item.availableSeats}
             </Typography>
 
             <Box
@@ -172,7 +178,7 @@ export default function ScheduleList({
                     navigate(`/seats/${item.id}`);
                   }}
                 >
-                  Sefer Seç
+                  {t("selectSchedule")}
                 </Button>
               </Box>
             </Box>

@@ -9,6 +9,12 @@ export const apiClient = {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(body),
     });
-    return res.json();
+    const text = await res.text();
+    try {
+      return text ? JSON.parse(text) : null;
+    } catch (err) {
+      console.error("Invalid JSON:", text);
+      throw err;
+    }
   },
 };

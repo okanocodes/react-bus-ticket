@@ -90,6 +90,7 @@ export default React.memo(function SeatMap({ schema }: { schema: SeatSchema }) {
               ? "success.main"
               : "grey.200",
             cursor: isDisabled ? "not-allowed" : "pointer",
+            color: "black",
             display: "flex",
             alignItems: "center",
             justifyContent: "center",
@@ -118,8 +119,8 @@ export default React.memo(function SeatMap({ schema }: { schema: SeatSchema }) {
           sx={{
             display: "grid",
             gridTemplateColumns: `repeat(${cols}, ${CELL.w}px)`,
-            gap: 8,
-            justifyContent: "start",
+            gap: { xs: 2, md: 4, lg: 8 },
+            justifyContent: { xs: "center", md: "start" },
             mb: 1,
           }}
         >
@@ -156,8 +157,8 @@ export default React.memo(function SeatMap({ schema }: { schema: SeatSchema }) {
         sx={{
           display: "grid",
           gridTemplateColumns: `repeat(${cols}, ${CELL.w}px)`,
-          gap: 8,
-          justifyContent: "start",
+          gap: { xs: 2, md: 4, lg: 8 },
+          justifyContent: { xs: "center", md: "start" },
         }}
       >
         {cellsUI}

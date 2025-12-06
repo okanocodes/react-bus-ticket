@@ -7,25 +7,19 @@ import {
   MenuItem,
   Checkbox,
   FormControlLabel,
+  Button,
 } from "@mui/material";
-
-const passengerSchema = z.object({
-  firstName: z.string().min(2),
-  lastName: z.string().min(2),
-  idNo: z.string().min(5),
-  gender: z.enum(["male", "female"]),
-  email: z.string().email(),
-  phone: z.string().min(10),
-  kvkk: z.boolean().refine((v) => v === true, "KVKK onaylanmalı"),
-});
-
-type FormData = z.infer<typeof passengerSchema>;
+import { useTranslation } from "react-i18next";
+import { usePassengerSchema, type FormData } from "../hooks/usePassengerSchema";
+const passengerSchema = usePassengerSchema();
 
 export default function PassengerForm({
   onSubmit,
 }: {
   onSubmit: (d: FormData) => void;
 }) {
+  const { t } = useTranslation();
+
   const {
     register,
     handleSubmit,
@@ -41,65 +35,106 @@ export default function PassengerForm({
       sx={{ display: "grid", gap: 2 }}
     >
       <TextField
-        label="Ad"
+        label={t("firstname")}
         {...register("firstName")}
         error={!!errors.firstName}
-        helperText={errors.firstName?.message}
       />
+      {errors.firstName && (
+        <Box
+          component="p"
+          color="red"
+          margin="-10px 0 10px 14px!important"
+          padding="0px"
+          fontSize="0.75rem"
+        >
+          {t("firstnameError")}
+        </Box>
+      )}
       <TextField
-        label="Soyad"
+        label={t("surname")}
         {...register("lastName")}
         error={!!errors.lastName}
-        helperText={errors.lastName?.message}
       />
+      {errors.lastName && (
+        <Box
+          component="p"
+          color="red"
+          margin="-10px 0 10px 14px!important"
+          padding="0px"
+          fontSize="0.75rem"
+        >
+          {t("surnameError")}
+        </Box>
+      )}
       <TextField
-        label="TCKN"
+        label={t("idNumber")}
         {...register("idNo")}
         error={!!errors.idNo}
-        helperText={errors.idNo?.message}
       />
+      {errors.idNo && (
+        <Box
+          component="p"
+          color="red"
+          margin="-10px 0 10px 14px!important"
+          padding="0px"
+          fontSize="0.75rem"
+        >
+          {t("idNoError")}
+        </Box>
+      )}
 
       <TextField
         select
-        label="Cinsiyet"
+        label={t("gender")}
         defaultValue="male"
         {...register("gender")}
       >
-        <MenuItem value="male">Erkek</MenuItem>
-        <MenuItem value="female">Kadın</MenuItem>
+        <MenuItem value="male">{t("male")}</MenuItem>
+        <MenuItem value="female">{t("female")}</MenuItem>
       </TextField>
 
       <TextField
-        label="E‑posta"
+        label={t("email")}
         {...register("email")}
         error={!!errors.email}
-        helperText={errors.email?.message}
       />
+      {errors.phone && (
+        <Box
+          component="p"
+          color="red"
+          margin="-10px 0 10px 14px!important"
+          padding="0px"
+          fontSize="0.75rem"
+        >
+          {t("emailError")}
+        </Box>
+      )}
       <TextField
-        label="Telefon"
+        label={t("phone")}
         {...register("phone")}
         error={!!errors.phone}
-        helperText={errors.phone?.message}
       />
+      {errors.phone && (
+        <Box
+          component="p"
+          color="red"
+          margin="-10px 0 10px 14px!important"
+          padding="0px"
+          fontSize="0.75rem"
+        >
+          {t("phoneError")}
+        </Box>
+      )}
 
       <FormControlLabel
         control={<Checkbox {...register("kvkk")} />}
-        label="KVKK ve sözleşmeleri kabul ediyorum"
+        label={t("kvkkText")}
       />
-      {errors.kvkk && <Box color="red">{errors.kvkk.message}</Box>}
+      {errors.kvkk && <Box color="red">{t("kvkkError")}</Box>}
 
-      <button
-        type="submit"
-        style={{
-          padding: "10px",
-          background: "#1976d2",
-          color: "white",
-          border: 0,
-          borderRadius: 4,
-        }}
-      >
-        Devam Et
-      </button>
+      <Button type="submit" variant="contained">
+        {t("payNow")}
+      </Button>
     </Box>
   );
 }

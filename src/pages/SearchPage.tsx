@@ -3,6 +3,8 @@ import ScheduleList from "../components/ScheduleList";
 import { useMemo, useState } from "react";
 import { useSchedules } from "../hooks/useSchedules";
 import { Typography } from "@mui/material";
+import { useTranslation } from "react-i18next";
+
 export default function SearchPage() {
   const [formInputs, setFormInputs] = useState<{
     from: string;
@@ -44,11 +46,13 @@ export default function SearchPage() {
     setSortBy("price");
   };
 
+  const { t } = useTranslation();
+
   return (
     <>
-      <div>Sefer Ara:</div>
+      <div>{t("searchScehedule")}</div>
       <SearchForm onSearch={setFormInputs} />
-      {isLoading && <Typography mt={2}>Yükleniyor...</Typography>}
+      {isLoading && <Typography mt={2}>{t("loading")}</Typography>}
       {!isLoading && formInputs && (
         <ScheduleList
           list={sortedSchedules}

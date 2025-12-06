@@ -1,3 +1,124 @@
-export default function i8n() {
-  //
-}
+import i18n from "i18next";
+import { initReactI18next } from "react-i18next";
+import LanguageDetector from "i18next-browser-languagedetector";
+import { updateDayjsLocale } from "./dayjs-i18n";
+
+const resources = {
+  tr: {
+    translation: {
+      search: "Ara",
+      departure: "Kalkış",
+      arrival: "Varış",
+      date: "Tarih",
+      seats: "Koltuklar",
+      schedule: "Sefer",
+      availableSeats: "Boş Koltuklar",
+      selectSeat: "Koltuk Seç",
+      continue: "Devam Et",
+      searchScehedule: "Sefer Ara",
+      loading: "Yükleniyor...",
+      summary: "Özet",
+      selectSchedule: "Sefer Seç",
+      scheduleNotFound: "Sefer bulunamadı.",
+      sort: "Sırala",
+      dateOfJourney: "Yolculuk Tarihi",
+      seatSelection: "Koltuk Seçimi",
+      selectedSeats: "Seçilen Koltuklar",
+      noSelectedSeats: "Seçilen Koltuk Yok",
+      empty: "Boş",
+      occupied: "Dolu",
+      selected: "Seçili",
+      door: "Kapı",
+      totalPrice: "Toplam Fiyat",
+      payNow: "Şimdi Öde",
+      kvkkText: "KVKK ve sözleşmeleri kabul ediyorum",
+      firstname: "İsim",
+      surname: "Soyisim",
+      idNumber: "TC Kimlik No",
+      gender: "Cinsiyet",
+      male: "Erkek",
+      female: "Kadın",
+      email: "E-posta",
+      phone: "Telefon",
+      unitPrice: "Birim Fiyat",
+      seatCount: "Koltuk Sayısı",
+      total: "Toplam",
+      firstnameError: "En az 2 karakter olmalı",
+      surnameError: "En az 2 karakter olmalı",
+      idNoError: "En az 5 karakter olmalı",
+      genderError: "Cinsiyet seçilmeli",
+      emailError: "Geçerli bir e-posta adresi girin",
+      phoneError: "En az 10 karakter olmalı",
+      kvkkError: "KVKK onaylanmalı",
+      success: "Başarılı!",
+      tickedDone: "Bilet işlemi tamamlandı.",
+      backtoHome: "Ana Sayfaya Dön",
+    },
+  },
+  en: {
+    translation: {
+      search: "Search",
+      departure: "From",
+      arrival: "To",
+      date: "Date",
+      seats: "Seats",
+      schedule: "Schedule",
+      availableSeats: "Available Seats",
+      selectSeat: "Select Seat",
+      door: "Door",
+      continue: "Continue",
+      searchScehedule: "Search Schedule",
+      loading: "Loading...",
+      summary: "Summary",
+      selectSchedule: "Select Schedule",
+      scheduleNotFound: "Schedule not found.",
+      sort: "Sort",
+      dateOfJourney: "Date of Journey",
+      seatSelection: "Seat Selection",
+      selectedSeats: "Selected Seats",
+      noSelectedSeats: "No Seats Selected",
+      empty: "Empty",
+      occupied: "Occupied",
+      selected: "Selected",
+      totalPrice: "Total Price",
+      payNow: "Pay Now",
+      kvkkText: "I accept the KVKK and agreements",
+      firstname: "Name",
+      surname: "Surname",
+      idNumber: "ID Number",
+      gender: "Gender",
+      male: "Male",
+      female: "Female",
+      email: "Email",
+      phone: "Phone",
+      unitPrice: "Unit Price",
+      seatCount: "Seat Count",
+      total: "Total",
+      firstnameError: "Must be at least 2 characters",
+      surnameError: "Must be at least 2 characters",
+      idNoError: "Must be at least 5 characters",
+      genderError: "Gender must be selected",
+      emailError: "Enter a valid email address",
+      phoneError: "Must be at least 10 characters",
+      kvkkError: "KVKK must be accepted",
+      success: "Successful!",
+      tickedDone: "The ticket transaction has been completed.",
+      backtoHome: "Return to the Home Page",
+    },
+  },
+};
+
+i18n
+  .use(LanguageDetector)
+  .use(initReactI18next)
+  .init({
+    resources,
+    fallbackLng: "tr",
+    interpolation: { escapeValue: false },
+  });
+
+i18n.on("languageChanged", (lng) => {
+  updateDayjsLocale(lng); // Auto-sync dayjs locale [web:3]
+});
+
+export default i18n;
