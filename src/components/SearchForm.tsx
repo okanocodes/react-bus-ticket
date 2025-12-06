@@ -24,7 +24,6 @@ export default function SearchForm({
     queryKey: ["agencies"],
     queryFn: () => apiClient.get("/api/reference/agencies"),
   });
-  console.log("agencies:", agencies);
 
   const { register, handleSubmit, setValue, watch } = useForm<FormData>({
     resolver: zodResolver(schema),
@@ -43,11 +42,11 @@ export default function SearchForm({
       component="form"
       display="flex"
       gap={2}
-      padding={2}
       sx={{
         width: "100%",
         alignItems: "center",
         justifyContent: "space-between",
+        padding: "2em 0",
       }}
       onSubmit={handleSubmit(onSearch)}
     >

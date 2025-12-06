@@ -6,10 +6,11 @@ import {
   Stack,
   Box,
   Tooltip,
-  IconButton,
   Menu,
-  Icon,
   MenuItem,
+  FormControl,
+  InputLabel,
+  Select,
 } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import { useTripStore } from "../store/useTripStore";
@@ -25,14 +26,20 @@ dayjs.extend(dayjsPluginUTC);
 
 export default function ScheduleList({
   list,
+  scheduleDate,
+  companies,
+  selectedCompany,
+  onSelectCompany,
   onSortByDeparture,
   onSortByPrice,
-  scheduleDate,
 }: {
   list: ScheduleItem[];
+  scheduleDate: string;
+  companies: string[];
+  selectedCompany: string | null;
+  onSelectCompany: (val: string | null) => void;
   onSortByDeparture: () => void;
   onSortByPrice: () => void;
-  scheduleDate: string;
 }) {
   const navigate = useNavigate();
   const setTrip = useTripStore((s) => s.setTrip);
@@ -61,19 +68,27 @@ export default function ScheduleList({
     setAnchorEl(null);
   };
 
-  // const sortByDeparture = (a: any, b: any) => {
-  //   return new Date(a.departure).getTime() - new Date(b.departure).getTime();
-  // };
-
-  // const sortByPrice = (a: any, b: any) => {
-  //   return a.price - b.price;
-  // };
-
   return (
     <Stack spacing={2} mt={2}>
       <Stack direction="row" justifyContent="space-between" alignItems="center">
         <Box>
-          {t("dateOfJourney")}: {formattedScheduleDate}
+          <FormControl size="small" sx={{ minWidth: 200 }}>
+            <InputLabel>{t("company")}</InputLabel>
+            <Select
+              label={t("company")}
+              value={selectedCompany || ""}
+              onChange={(e) =>
+                onSelectCompany(e.target.value === "" ? null : e.target.value)
+              }
+            >
+              <MenuItem value="">{t("all")}</MenuItem>
+              {companies.map((c) => (
+                <MenuItem key={c} value={c}>
+                  {c}
+                </MenuItem>
+              ))}
+            </Select>
+          </FormControl>
         </Box>
         <Box display="flex" gap={2}>
           <Tooltip title="Sırala">
@@ -112,7 +127,7 @@ export default function ScheduleList({
               }}
               disableRipple
             >
-              Kalkış Saatine Göre
+              {t("byTime")}
             </MenuItem>
             <MenuItem
               onClick={() => {
@@ -121,7 +136,7 @@ export default function ScheduleList({
               }}
               disableRipple
             >
-              Fiyata Göre
+              {t("byPrice")}
             </MenuItem>
           </Menu>
         </Box>
